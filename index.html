@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0f">
+  <meta name="description" content="PitWall — una red de aficionados al automovilismo.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon-192.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    /* Character selection layout fixes: presentation only. */
+    .character-card{appearance:none;color:var(--text);text-align:center;display:flex;flex-direction:column;align-items:center;height:275px;min-height:275px}
+    .character-card .role-index{align-self:flex-start}
+    .character-card .avatar{flex:0 0 auto}
+    .character-name{display:block;width:100%;min-height:1.25em;color:var(--text);line-height:1.1;white-space:normal;overflow-wrap:anywhere}
+    .character-role{display:block;width:100%;min-height:2.7em;margin-top:6px;color:var(--muted);line-height:1.35;white-space:normal;overflow-wrap:anywhere}
+    @media(max-width:850px){.character-card{height:250px;min-height:250px}}
+    @media(max-width:520px){.character-card{height:230px;min-height:230px}.character-name{font-size:1.22rem}.character-role{font-size:.56rem}}
+  </style>
+  <title>PitWall — F1 Fan Network</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar" aria-label="Cabecera de PitWall">
+      <a class="brand" href="./" aria-label="PitWall, inicio">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>PIT<span>WALL</span></span>
+      </a>
+      <div class="session-status"><span class="status-dot"></span><span>LIVE COMMUNITY</span></div>
+      <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Activar notificaciones" title="Activar notificaciones">
+        <span class="bell-icon" aria-hidden="true">⌁</span><span class="notification-badge" hidden></span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> THE PADDOCK IS YOURS</p>
+          <h1 id="hero-title">Tu voz.<br><em>Tu</em> pitwall.</h1>
+          <p class="hero-intro">El lugar donde las decisiones se sienten antes de que caiga la bandera a cuadros.</p>
+        </div>
+        <div class="telemetry-card" aria-label="Telemetría de la comunidad">
+          <div class="telemetry-heading"><span>SESSION DATA</span><span>PW-01</span></div>
+          <div class="telemetry-value">05 <small>ROLES</small></div>
+          <div class="telemetry-track"><span></span></div>
+          <div class="telemetry-meta"><span>COMMUNITY STATUS</span><strong>CONNECTED</strong></div>
+        </div>
+      </section>
+
+      <section class="character-section" aria-labelledby="character-title">
+        <div class="section-heading"><div><p class="eyebrow">01 / CHOOSE YOUR ROLE</p><h2 id="character-title">¿Desde qué asiento opinas?</h2></div><span class="section-count">5 IDENTIDADES</span></div>
+        <div class="character-grid" id="characterGrid" role="list"></div>
+      </section>
+
+      <section class="feed-section" id="feedSection" aria-labelledby="feed-title" hidden>
+        <div class="feed-heading">
+          <div><p class="eyebrow">02 / THE FEED</p><h2 id="feed-title">Mensajes del pitwall</h2></div>
+          <div class="feed-filter"><span class="live-dot"></span> AHORA</div>
+        </div>
+        <div class="composer-bar"><div class="composer-person" id="composerPerson"></div><button class="compose-button" id="composeButton" type="button"><span>＋</span> Compartir una lectura</button></div>
+        <div class="message-list" id="messageList" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>PITWALL / FAN NETWORK</span><span>NO OFFICIAL AFFILIATION · BUILT FOR THE PADDOCK</span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="composeModal" hidden>
+    <section class="compose-modal" role="dialog" aria-modal="true" aria-labelledby="composeTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar">×</button>
+      <p class="eyebrow">TRANSMISSION / NEW</p><h2 id="composeTitle">Lanza tu lectura</h2>
+      <div class="modal-author" id="modalAuthor"></div>
+      <label class="sr-only" for="messageInput">Tu mensaje</label>
+      <textarea id="messageInput" maxlength="280" rows="5" placeholder="¿Qué está pasando en pista?" spellcheck="true"></textarea>
+      <div class="modal-footer"><span id="characterCounter">0 / 280</span><button class="primary-button" id="publishButton" type="button">Publicar <span>↗</span></button></div>
+      <p class="form-error" id="formError" role="alert" hidden></p>
+    </section>
+  </div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
